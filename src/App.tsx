@@ -146,7 +146,7 @@ const AnimatedRoutes = () => {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
           >
-            <ProtectedRoute><CapEtParcours /></ProtectedRoute>
+            <CapEtParcours />
           </motion.div>
         } />
         <Route path="/attention-zones" element={
@@ -156,7 +156,7 @@ const AnimatedRoutes = () => {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
           >
-            <ProtectedRoute><AttentionZones /></ProtectedRoute>
+            <AttentionZones />
           </motion.div>
         } />
         <Route path="/micro-actions" element={
@@ -166,7 +166,7 @@ const AnimatedRoutes = () => {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
           >
-            <ProtectedRoute><MicroActions /></ProtectedRoute>
+            <MicroActions />
           </motion.div>
         } />
         <Route path="/journal" element={
@@ -176,7 +176,7 @@ const AnimatedRoutes = () => {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
           >
-            <ProtectedRoute><Journal /></ProtectedRoute>
+            <Journal />
           </motion.div>
         } />
         <Route path="/pricing" element={<Navigate to="/account/subscription" replace />} />
@@ -187,7 +187,7 @@ const AnimatedRoutes = () => {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
           >
-            <ProtectedRoute><IdeaProject /></ProtectedRoute>
+            <IdeaProject />
           </motion.div>
         } />
         <Route path="/history" element={
@@ -197,7 +197,7 @@ const AnimatedRoutes = () => {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
           >
-            <ProtectedRoute><History /></ProtectedRoute>
+            <History />
           </motion.div>
         } />
         <Route path="/edit-idea" element={

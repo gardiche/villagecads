@@ -91,13 +91,13 @@ export function AppSidebar({ currentIdeaId, onOpenCoaching }: AppSidebarProps) {
   };
 
   const handlePremiumClick = (type: "historique" | "coaching") => {
-    if (!isAuthenticated) {
+    if (type === "historique") {
+      handleNavigation("/history", "history");
+    } else if (false) {
       setLoginGateAction(type);
       setShowLoginGate(true);
     } else {
-      if (type === "historique") {
-        handleNavigation("/history", "history");
-      } else if (type === "coaching" && onOpenCoaching) {
+      if (type === "coaching" && onOpenCoaching) {
         const event = {
           type: "mentorat_sidebar_clicked",
           timestamp: new Date().toISOString(),
