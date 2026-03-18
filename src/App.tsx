@@ -136,7 +136,7 @@ const AnimatedRoutes = () => {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
           >
-            <ProtectedRoute><ProfilEntrepreneurial /></ProtectedRoute>
+            <ProfilEntrepreneurial />
           </motion.div>
         } />
         <Route path="/cap-parcours" element={

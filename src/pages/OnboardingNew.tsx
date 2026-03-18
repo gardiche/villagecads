@@ -557,92 +557,62 @@ const OnboardingNew = () => {
 
       sessionStorage.setItem('astryd_onboarding_data', JSON.stringify(questionnaireData));
 
-      // Vérifier si l'utilisateur est authentifié
-      const { data: { session } } = await supabase.auth.getSession();
-      const isAuthenticated = !!session?.user;
-
-      if (isAuthenticated) {
-        localStorage.setItem('astryd_user_authenticated', 'true');
-      } else {
-        localStorage.setItem('astryd_user_authenticated', 'false');
-      }
+      // MODE DÉMO : bypass auth et API, injection de données mockées
+      localStorage.setItem('astryd_user_authenticated', 'false');
 
       setLoading(true);
 
       try {
-        console.log('🚀 LAZY LOADING : Génération PROFIL avec RIASEC + CV');
-        
-        // 🔒 SÉCURITÉ 1: Timeout 60s pour éviter gel infini
-        const API_TIMEOUT_MS = 60000;
-        const timeoutPromise = new Promise<never>((_, reject) => 
-          setTimeout(() => reject(new Error('TIMEOUT_60S')), API_TIMEOUT_MS)
-        );
-        
-        const apiPromise = supabase.functions.invoke(
-          "generate-persona-profile",
-          { body: questionnaireData }
-        );
+        // Simulation d'un temps de calcul pour l'effet "génération en cours"
+        await new Promise(resolve => setTimeout(resolve, 2500));
 
-        // Race entre l'API et le timeout
-        let profileData: any;
-        let profileError: any;
-        
-        try {
-          const result = await Promise.race([apiPromise, timeoutPromise]);
-          profileData = result.data;
-          profileError = result.error;
-        } catch (raceError: any) {
-          if (raceError?.message === 'TIMEOUT_60S') {
-            console.error('❌ Timeout 60s dépassé pour génération profil');
-            toast.error("La génération prend trop de temps. Veuillez réessayer.");
-            setLoading(false);
-            return;
-          }
-          throw raceError;
-        }
-
-        if (profileError || !profileData || !profileData.titre) {
-          console.error('❌ Erreur génération profil:', profileError);
-          const fallbackResults = createFallbackResults();
-          localStorage.setItem('ASTRYD_COMPLETE_RESULTS', JSON.stringify(fallbackResults));
-          toast.error("Une erreur est survenue lors de la génération de votre profil. Redirection avec données partielles.");
-          navigate('/profil-entrepreneurial?from=onboarding');
-          return;
-        }
-
-        // Sauvegarder UNIQUEMENT le profil dans localStorage
-        const resultsToStore = {
+        const demoResults = {
           personaData: {
-            titre: profileData.titre || "Votre profil entrepreneurial",
-            synthese: profileData.synthese || "Analyse en cours...",
-            cap2_4semaines: profileData.cap2_4semaines || "Définir une priorité claire",
-            forces: profileData.forces || [],
-            verrous: profileData.verrous || [],
-            visualUrl: null, // Sera mis à jour par l'image anticipée
+            titre: "L'Architecte de Vision",
+            synthese: "Vous êtes un entrepreneur à forte capacité de projection, capable de transformer des intuitions complexes en stratégies concrètes. Votre moteur principal est la création de valeur durable — pas seulement économique, mais humaine et sociale. Vous avancez vite quand la mission est claire, mais vous avez besoin d'un cadre pour canaliser votre énergie dispersive.",
+            cap2_4semaines: "Valider votre proposition de valeur auprès de 10 clients potentiels avec un prototype ou une maquette fonctionnelle",
+            forces: [
+              "Vision systémique et capacité à connecter les points",
+              "Leadership naturel qui fédère autour d'une mission",
+              "Résilience face à l'incertitude et aux pivots",
+              "Fort sens de l'écoute et de l'empathie client",
+              "Capacité à apprendre rapidement et à s'adapter",
+            ],
+            verrous: [
+              "Tendance à sur-planifier avant d'agir (perfectionnisme)",
+              "Difficulté à déléguer sans contrôler",
+              "Manque de structure dans la gestion du temps",
+              "Sensibilité au regard des autres qui peut freiner la prise de risque",
+            ],
+            visualUrl: null,
           },
-          micro_actions: [],
-          zones_attention: [],
+          micro_actions: [
+            { id: "1", title: "Contacter 3 clients potentiels cette semaine", priority: "high", category: "Validation" },
+            { id: "2", title: "Définir votre offre en une phrase claire", priority: "high", category: "Positionnement" },
+            { id: "3", title: "Bloquer 2h par jour pour le travail de fond", priority: "medium", category: "Organisation" },
+          ],
+          zones_attention: [
+            { id: "1", title: "Gestion de l'énergie", description: "Vous avez tendance à vous épuiser dans les phases d'exploration. Structurez vos journées avec des plages de récupération." },
+            { id: "2", title: "Clarté de l'offre", description: "Votre vision est large — prenez le temps de la traduire en proposition de valeur simple et mémorable." },
+          ],
           parcours: [],
           generatedAt: new Date().toISOString(),
         };
 
-        localStorage.setItem('ASTRYD_COMPLETE_RESULTS', JSON.stringify(resultsToStore));
+        localStorage.setItem('ASTRYD_COMPLETE_RESULTS', JSON.stringify(demoResults));
         localStorage.setItem('ASTRYD_ASSESSMENT_DATA', JSON.stringify(questionnaireData));
 
-        // 🔒 SÉCURITÉ 2: Vérification localStorage
+        // Vérification localStorage
         const savedData = localStorage.getItem('ASTRYD_COMPLETE_RESULTS');
         if (!savedData) {
-          console.error('❌ ERREUR CRITIQUE: localStorage vide après sauvegarde');
           toast.error("Erreur sauvegarde navigateur. Veuillez réessayer.");
           setLoading(false);
           return;
         }
 
-        // Vérifier que les données sont parsables et contiennent le minimum
         try {
           const parsed = JSON.parse(savedData);
           if (!parsed?.personaData?.titre) {
-            console.error('❌ ERREUR: données sauvegardées incomplètes');
             toast.error("Erreur de sauvegarde des résultats. Veuillez réessayer.");
             setLoading(false);
             return;
@@ -654,7 +624,6 @@ const OnboardingNew = () => {
           return;
         }
 
-        console.log('✅ Profil généré et sauvegardé (vérifié)');
         navigate('/profil-entrepreneurial?from=onboarding');
 
         // Nettoyer
@@ -662,79 +631,10 @@ const OnboardingNew = () => {
         sessionStorage.removeItem('astryd_persona_data');
         localStorage.removeItem('astryd_onboarding_draft_new');
 
-        // 🎨 Récupérer l'image anticipée (lancée à l'étape 3)
-        const imagePromise = (window as any).__astrydImagePromise;
-        if (imagePromise) {
-          imagePromise.then(({ data: visualData, error: visualError }: any) => {
-            if (visualError || !visualData?.imageUrl) {
-              console.warn('⚠️ Image anticipée non disponible, relance...');
-              // Fallback: relancer la génération
-              supabase.functions.invoke("generate-persona-visual", {
-                body: {
-                  personaId: profileData.personaId || "profil_entrepreneur",
-                  equilibreValues: questionnaireData.equilibreValues,
-                  motivations: questionnaireData.motivations,
-                  champsLibre: questionnaireData.champsLibre,
-                }
-              }).then(({ data: retryData }) => {
-                if (retryData?.imageUrl) {
-                  updateImageInLocalStorage(retryData.imageUrl);
-                }
-              });
-              return;
-            }
-            console.log('✅ Image anticipée récupérée avec succès');
-            updateImageInLocalStorage(visualData.imageUrl);
-          }).catch(() => {
-            console.warn('⚠️ Erreur récupération image anticipée');
-          });
-          delete (window as any).__astrydImagePromise;
-        }
-
-        // Helper pour mise à jour image
-        function updateImageInLocalStorage(imageUrl: string) {
-          const currentResults = localStorage.getItem('ASTRYD_COMPLETE_RESULTS');
-          if (currentResults) {
-            const parsed = JSON.parse(currentResults);
-            parsed.personaData.visualUrl = imageUrl;
-            localStorage.setItem('ASTRYD_COMPLETE_RESULTS', JSON.stringify(parsed));
-            window.dispatchEvent(new Event('astryd-data-update'));
-            console.log('🔔 Image mise à jour dans localStorage');
-          }
-        }
-
-        // 🎯 GÉNÉRATION MICRO-ACTIONS/ZONES/PARCOURS (avec RIASEC + CV)
-        console.log('🎯 Lancement génération micro-actions/zones/parcours avec compétences...');
-        supabase.functions.invoke("generate-persona-micro-actions", {
-          body: questionnaireData
-        }).then(({ data: actionsData, error: actionsError }) => {
-          if (actionsError || !actionsData) {
-            console.warn('⚠️ Micro-actions/zones non générées:', actionsError);
-            return;
-          }
-          console.log('✅ Micro-actions/zones/parcours générés avec succès');
-          
-          const currentResults = localStorage.getItem('ASTRYD_COMPLETE_RESULTS');
-          if (currentResults) {
-            const parsed = JSON.parse(currentResults);
-            parsed.micro_actions = actionsData.micro_actions || [];
-            parsed.zones_attention = actionsData.zones_attention || [];
-            parsed.parcours = actionsData.parcours || [];
-            localStorage.setItem('ASTRYD_COMPLETE_RESULTS', JSON.stringify(parsed));
-            window.dispatchEvent(new Event('astryd-data-update'));
-          }
-        }).catch((err) => {
-          console.warn('⚠️ Erreur génération micro-actions:', err);
-        });
-
       } catch (error) {
-        console.error('❌ ERREUR génération:', error);
-        const fallbackResults = createFallbackResults();
-        localStorage.setItem('ASTRYD_COMPLETE_RESULTS', JSON.stringify(fallbackResults));
-        toast.error("Une erreur est survenue", {
-          description: "Des résultats partiels sont affichés. Veuillez réessayer.",
-        });
-        navigate('/profil-entrepreneurial?from=onboarding');
+        console.error('❌ ERREUR démo:', error);
+        toast.error("Une erreur est survenue. Veuillez réessayer.");
+        setLoading(false);
         return;
       }
 
