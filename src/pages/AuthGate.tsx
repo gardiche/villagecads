@@ -343,15 +343,23 @@ const AuthGate = () => {
                 </Button>
               </form>
 
-              <div className="mt-6 text-center">
+              <div className="mt-6 text-center space-y-3">
                 <button
                   onClick={() => setIsLogin(!isLogin)}
                   className="text-sm text-primary hover:underline"
                 >
-                  {isLogin 
-                    ? "Pas encore de compte ? Créer un compte" 
+                  {isLogin
+                    ? "Pas encore de compte ? Créer un compte"
                     : "Déjà un compte ? Se connecter"}
                 </button>
+                <div>
+                  <button
+                    onClick={() => navigate('/profil-entrepreneurial')}
+                    className="text-sm text-muted-foreground hover:text-foreground underline underline-offset-4"
+                  >
+                    Passer pour l'instant →
+                  </button>
+                </div>
               </div>
             </Card>
           </motion.div>
