@@ -354,7 +354,7 @@ const AuthGate = () => {
                 </button>
                 <div>
                   <button
-                    onClick={() => navigate('/profil-entrepreneurial')}
+                    onClick={() => navigate('/onboarding')}
                     className="text-sm text-muted-foreground hover:text-foreground underline underline-offset-4"
                   >
                     Passer pour l'instant →
