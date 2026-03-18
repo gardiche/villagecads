@@ -116,7 +116,7 @@ const Index = () => {
             <Button 
               size="lg" 
               className="text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6" 
-              onClick={() => navigate('/auth-gate')}
+              onClick={() => navigate('/auth')}
             >
               <BookOpen className="w-5 h-5 mr-2" />
               Démarrer mon parcours

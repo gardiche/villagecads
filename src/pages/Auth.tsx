@@ -560,6 +560,15 @@ const Auth = () => {
             conditions d'utilisation
           </a>
         </p>
+
+        <div className="text-center mt-3">
+          <button
+            onClick={() => navigate('/onboarding')}
+            className="text-sm text-muted-foreground hover:text-foreground underline underline-offset-4"
+          >
+            Passer pour l'instant →
+          </button>
+        </div>
           </div>
         </div>
       </div>
