@@ -1,0 +1,268 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   VILLAGE BY CA — Design System
+   Palette : Jaune #f9b104 · Noir #1d1d1b · Blanc cassé #ebecdf
+             Blanc #ffffff · Jaune doux #f7bc2b · Gris chaud #ccc6bd
+   Typo : HK Grotesk
+   ============================================================ */
+
+/* HK Grotesk font-face declarations */
+@font-face {
+  font-family: 'HK Grotesk';
+  src: url('/font/HKGrotesk-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'HK Grotesk';
+  src: url('/font/HKGrotesk-LightItalic.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'HK Grotesk';
+  src: url('/font/HKGrotesk-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'HK Grotesk';
+  src: url('/font/HKGrotesk-Italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'HK Grotesk';
+  src: url('/font/HKGrotesk-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'HK Grotesk';
+  src: url('/font/HKGrotesk-SemiBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'HK Grotesk';
+  src: url('/font/HKGrotesk-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'HK Grotesk';
+  src: url('/font/HKGrotesk-ExtraBold.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'HK Grotesk';
+  src: url('/font/HKGrotesk-Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* === VILLAGE BY CA — Light Mode === */
+
+    /* Fond principal : blanc cassé chaud */
+    --background: 50 20% 93%;         /* #ebecdf */
+    --foreground: 0 1% 11%;            /* #1d1d1b */
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 1% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 1% 11%;
+
+    /* Primary : Jaune Village #f9b104 */
+    --primary: 42 97% 50%;
+    --primary-foreground: 0 1% 11%;
+
+    /* Secondary : Blanc pur */
+    --secondary: 0 0% 100%;
+    --secondary-foreground: 0 1% 11%;
+
+    /* Muted : Gris chaud #ccc6bd */
+    --muted: 37 10% 77%;               /* #ccc6bd */
+    --muted-foreground: 0 1% 35%;
+
+    /* Accent : Jaune doux #f7bc2b */
+    --accent: 43 92% 57%;              /* #f7bc2b */
+    --accent-foreground: 0 1% 11%;
+
+    --success: 142 60% 38%;
+    --success-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Borders */
+    --border: 37 12% 80%;
+    --input: 37 12% 80%;
+    --ring: 42 97% 50%;
+
+    /* Border radius : formes généreuses, moderne */
+    --radius: 0.75rem;
+
+    /* Shadows — chauds, subtils */
+    --shadow-soft: 0 1px 3px 0 hsl(42 30% 50% / 0.12);
+    --shadow-medium: 0 4px 16px -4px hsl(42 30% 30% / 0.15);
+    --shadow-float: 0 8px 32px -8px hsl(42 30% 20% / 0.18);
+
+    --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Sphere colors — tons chauds Village */
+    --sphere-soi: 42 97% 50%;
+    --sphere-couple: 43 92% 57%;
+    --sphere-famille: 37 85% 48%;
+    --sphere-amis: 37 10% 55%;
+    --sphere-loisirs: 142 40% 42%;
+    --sphere-pro: 0 1% 11%;
+
+    /* Chart colors */
+    --chart-1: 42 97% 50%;
+    --chart-2: 43 92% 57%;
+    --chart-3: 37 10% 55%;
+
+    /* Sidebar — Noir Village avec accents jaunes */
+    --sidebar-background: 0 1% 11%;         /* #1d1d1b */
+    --sidebar-foreground: 50 20% 93%;       /* blanc cassé */
+    --sidebar-primary: 42 97% 50%;          /* jaune */
+    --sidebar-primary-foreground: 0 1% 11%;
+    --sidebar-accent: 0 1% 18%;
+    --sidebar-accent-foreground: 50 20% 93%;
+    --sidebar-border: 0 1% 20%;
+    --sidebar-ring: 42 97% 50%;
+  }
+
+  .dark {
+    --background: 0 1% 8%;
+    --foreground: 50 20% 93%;
+
+    --card: 0 1% 11%;
+    --card-foreground: 50 20% 93%;
+
+    --popover: 0 1% 11%;
+    --popover-foreground: 50 20% 93%;
+
+    --primary: 42 97% 50%;
+    --primary-foreground: 0 1% 11%;
+
+    --secondary: 0 1% 16%;
+    --secondary-foreground: 50 20% 93%;
+
+    --muted: 0 1% 18%;
+    --muted-foreground: 37 10% 60%;
+
+    --accent: 43 92% 57%;
+    --accent-foreground: 0 1% 11%;
+
+    --success: 142 50% 42%;
+    --success-foreground: 0 0% 100%;
+
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 1% 22%;
+    --input: 0 1% 22%;
+    --ring: 42 97% 50%;
+
+    --shadow-soft: 0 1px 3px 0 hsl(0 0% 0% / 0.3);
+    --shadow-medium: 0 4px 16px -4px hsl(0 0% 0% / 0.4);
+    --shadow-float: 0 8px 32px -8px hsl(0 0% 0% / 0.5);
+
+    --chart-1: 42 97% 55%;
+    --chart-2: 43 92% 62%;
+    --chart-3: 37 10% 60%;
+
+    --sidebar-background: 0 1% 8%;
+    --sidebar-foreground: 50 20% 93%;
+    --sidebar-primary: 42 97% 50%;
+    --sidebar-primary-foreground: 0 1% 11%;
+    --sidebar-accent: 0 1% 14%;
+    --sidebar-accent-foreground: 50 20% 93%;
+    --sidebar-border: 0 1% 18%;
+    --sidebar-ring: 42 97% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+/* ============================================================
+   VILLAGE — Composants utilitaires
+   ============================================================ */
+
+/* Bouton primaire Village — jaune + noir, sans arrondi excessif */
+.btn-village {
+  @apply bg-primary text-primary-foreground font-bold tracking-tight
+         px-6 py-3 rounded-lg
+         hover:brightness-105 active:scale-[0.98]
+         transition-all duration-150 ease-out;
+}
+
+/* Card Village — fond blanc, border subtile, shadow chaud */
+.card-village {
+  @apply bg-white border border-border rounded-xl
+         shadow-[var(--shadow-medium)];
+}
+
+/* Badge Village accent */
+.badge-village {
+  @apply bg-primary/10 text-primary font-semibold text-xs
+         px-2.5 py-0.5 rounded-full;
+}
+
+/* Highlight jaune Village sur texte */
+.text-highlight {
+  @apply text-primary font-bold;
+}
+
+/* Section background alternée */
+.section-warm {
+  background-color: hsl(var(--background));
+}
+.section-white {
+  background-color: #ffffff;
+}
+
+/* Motif décoratif Village — utilisé en pseudo-element */
+.village-pattern-bg {
+  position: relative;
+}
+.village-pattern-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/village/MOTIF_2025_ETOILE_noir.svg');
+  background-repeat: repeat;
+  background-size: 120px;
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 0;
+}

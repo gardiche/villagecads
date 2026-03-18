@@ -1,0 +1,100 @@
+project_id = "lpznkbsjyrexjctasqvj"
+
+[functions.fill-missing-recommendations]
+verify_jwt = false
+
+[functions.support-chat]
+verify_jwt = false
+
+[functions.save-support-conversation]
+verify_jwt = false
+
+[functions.send-support-message]
+verify_jwt = false
+
+[functions.analyze-cv]
+verify_jwt = false
+
+[functions.calculate-alignment]
+verify_jwt = false
+
+[functions.astryd-analyse]
+verify_jwt = false
+
+[functions.test-openai]
+verify_jwt = false
+
+[functions.chat-journal]
+verify_jwt = false
+
+[functions.update-maturity]
+verify_jwt = false
+
+[functions.analyze-history]
+verify_jwt = false
+
+[functions.save-and-analyze]
+verify_jwt = false
+
+[functions.suggest-decision]
+verify_jwt = false
+
+[functions.generate-persona-profile]
+verify_jwt = false
+
+[functions.generate-persona-micro-actions]
+verify_jwt = false
+
+[functions.generate-persona-visual]
+verify_jwt = false
+
+[functions.save-guest-results]
+verify_jwt = false
+
+[functions.retrieve-guest-results]
+verify_jwt = false
+
+[functions.create-profile-share]
+verify_jwt = false
+
+[functions.generate-pdf-export]
+verify_jwt = false
+
+[functions.audit-persona-flow]
+verify_jwt = false
+
+[functions.reformulate-objective]
+verify_jwt = false
+
+[functions.regenerate-recommendations]
+verify_jwt = false
+
+[functions.delete-all-users]
+verify_jwt = false
+
+[functions.seed-test-data]
+verify_jwt = false
+
+[functions.send-mentorat-request]
+verify_jwt = false
+
+[functions.generate-contextual-action]
+verify_jwt = false
+
+[functions.manage-micro-actions]
+verify_jwt = false
+
+[functions.send-contact-email]
+verify_jwt = false
+
+[functions.list-users]
+verify_jwt = false
+
+[functions.generate-objective]
+verify_jwt = false
+
+[functions.check-admin-role]
+verify_jwt = false
+
+[functions.categorize-blocages]
+verify_jwt = false

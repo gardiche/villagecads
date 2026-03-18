@@ -1,0 +1,19 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" id="Calque_2" data-name="Calque 2" viewBox="0 0 240.23 180.05" width="240.22999572753906" height="180.0500030517578">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #000;
+        stroke-miterlimit: 10;
+        stroke-width: 3px;
+      }
+    </style>
+  </defs>
+  <g id="Calque_2-2" data-name="Calque 2">
+    <g id="Calque_1-2" data-name="Calque 1-2">
+      <polygon class="cls-1" points="144.31 102.74 144.31 178.55 91.44 178.55 91.44 102.74 41.93 149.55 2.69 117.18 1.73 114.31 121 2.07 238.05 115.21 197.81 152.54 144.31 102.74"/>
+    </g>
+  </g>
+</svg>
